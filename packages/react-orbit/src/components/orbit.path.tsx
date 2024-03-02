@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useWindowSize } from 'src/hooks/useWindowSize';
 
 export type OrbitPathTypes = 'circle';
 
@@ -11,6 +12,7 @@ interface OrbitPathProps {
 export const OrbitPath: React.FC<OrbitPathProps> = ({ className, children, type }) => {
   const pathRef = useRef<HTMLDivElement>(null);
   const [newChildren, setNewChildren] = useState<React.ReactNode[]>([]);
+  const size = useWindowSize();
 
   useEffect(() => {
     if (!pathRef.current) return;
@@ -33,10 +35,16 @@ export const OrbitPath: React.FC<OrbitPathProps> = ({ className, children, type 
     });
 
     setNewChildren(updatedChildren);
-  }, [children]);
+  }, [children, size]);
 
   return (
-    <div className={className} ref={pathRef}>
+    <div
+      style={{
+        pointerEvents: 'none',
+      }}
+      className={className}
+      ref={pathRef}
+    >
       {newChildren}
     </div>
   );
