@@ -31,7 +31,7 @@ function Component() {
 }
 ```
 # Full Example
-This example is using [Next.js](https://nextjs.org/) and [useful-react-types](https://www.npmjs.com/package/useful-react-types)
+This example is using [Next.js](https://nextjs.org/) and [useful-react-types](https://www.npmjs.com/package/useful-react-types) and [tailwindcss](https://tailwindcss.com/).
 ```tsx
 'use client';
 import { OrbitPath, OrbitItem } from 'react-orbit-component';
