@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply bg-zinc-900 max-h-screen h-screen;
+  @apply bg-zinc-900 max-h-screen h-screen w-screen overflow-hidden;
 }
