@@ -31,11 +31,11 @@ export default function Page(): JSX.Element {
   return (
     <main>
       <div className="flex items-center justify-center min-h-screen">
-        <OrbitPath type="circle" className="absolute w-[25vh] h-[25vh] bg-transparent rounded-full border-2 border-white/10">
+        <OrbitPath type="circle" className="absolute w-[10rem] h-[10rem] bg-transparent rounded-full border-2 border-white/10">
           <OrbitItemFreezeOnMouseOver>🐒</OrbitItemFreezeOnMouseOver>
         </OrbitPath>
 
-        <OrbitPath type="circle" className="absolute w-[45vh] h-[45vh] bg-transparent rounded-full border-2 border-white/10">
+        <OrbitPath type="circle" className="absolute md:w-[20rem] md:h-[20rem] w-[15rem] h-[15rem] bg-transparent rounded-full border-2 border-white/10">
           <OrbitItem direction="clockwise" startAngle={120} step={0.2} className={SHARED_CLASSNAME}>
             😀
           </OrbitItem>
@@ -49,7 +49,7 @@ export default function Page(): JSX.Element {
           </OrbitItem>
         </OrbitPath>
 
-        <OrbitPath type="circle" className="absolute w-[65vh] h-[65vh] bg-transparent rounded-full border-2 border-white/10">
+        <OrbitPath type="circle" className="absolute md:w-[30rem] md:h-[30rem] w-[20rem] h-[20rem] bg-transparent rounded-full border-2 border-white/10">
           <OrbitItem direction="counter-clockwise" startAngle={240} step={0.3} className={SHARED_CLASSNAME}>
             🚀
           </OrbitItem>
