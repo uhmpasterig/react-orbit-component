@@ -4,7 +4,7 @@ export const calculateCoordinatesOnCircle = (radius: number, angle: number): { x
   const angleInRadians = angle * DEGREE_TO_RADIAN_FACTOR;
 
   return {
-    x: radius * (1 + Math.cos(angleInRadians)),
-    y: radius * (1 + Math.sin(angleInRadians)),
+    x: radius + (radius * Math.cos(angleInRadians)),
+    y: radius + (radius * Math.sin(angleInRadians)),
   };
 };
