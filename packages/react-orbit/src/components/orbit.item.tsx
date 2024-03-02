@@ -12,6 +12,7 @@ export type OrbitItemProps = {
   delay?: number;
   startAngle?: number;
   direction?: OrbitItemDirection;
+  style?: React.CSSProperties;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export const OrbitItem = ({
@@ -22,6 +23,7 @@ export const OrbitItem = ({
   delay = 10,
   startAngle = 0,
   direction = 'clockwise',
+  style,
   ...rest
 }: OrbitItemProps) => {
   const [angle, setAngle] = React.useState(startAngle);
@@ -44,6 +46,7 @@ export const OrbitItem = ({
         left: `${x}px`,
         transform: `translate(-50%, -50%)`,
         pointerEvents: 'all',
+        ...style,
       }}
       className={className}
       {...rest}
