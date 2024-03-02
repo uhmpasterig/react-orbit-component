@@ -9,6 +9,18 @@ interface OrbitPathProps {
   type: OrbitPathTypes;
 }
 
+/**
+ * @description
+ * OrbitPath is a component that creates a circular path for OrbitItems to follow.
+ * @property width & height - Should be the same size.
+ * @param className - Optional class name to add to the component.
+ * @param children - The OrbitItems to be placed on the path.
+ * @param type - The type of path to create.
+ * @example <caption>Creating a circular path</caption>
+ * <OrbitPath type="circle">
+ *    <OrbitItem></OrbitItem>
+ * </OrbitPath>
+ */
 export const OrbitPath: React.FC<OrbitPathProps> = ({ className, children, type }) => {
   const pathRef = useRef<HTMLDivElement>(null);
   const [newChildren, setNewChildren] = useState<React.ReactNode[]>([]);
