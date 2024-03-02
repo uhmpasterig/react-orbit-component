@@ -29,6 +29,9 @@ importers:
       react-orbit-component:
         specifier: workspace:*
         version: link:../../packages/react-orbit
+      useful-react-types:
+        specifier: ^1.0.2
+        version: 1.0.2
     devDependencies:
       '@next/eslint-plugin-next':
         specifier: ^14.0.4
