@@ -28,7 +28,7 @@ export const OrbitItem = ({
 }: OrbitItemProps) => {
   const [angle, setAngle] = React.useState(startAngle);
   const orbitItemRef = React.useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setAngle((prevAngle) => (direction === 'clockwise' ? prevAngle + (step % 360) : prevAngle - (step % 360)));
@@ -36,7 +36,7 @@ export const OrbitItem = ({
 
     return () => clearInterval(interval);
   }, [step, delay]);
-    
+
   const { x, y } = calculateCoordinatesOnCircle(radius, angle, orbitItemRef.current?.getBoundingClientRect() ?? new DOMRect());
 
   return (
@@ -49,9 +49,9 @@ export const OrbitItem = ({
         ...style,
       }}
       className={className}
+      ref={orbitItemRef}
       {...rest}
     >
-      ref={orbitItemRef}
       {children}
     </div>
   );
