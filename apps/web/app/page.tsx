@@ -1,17 +1,38 @@
 'use client';
 import { OrbitPath, OrbitItem } from 'react-orbit-component';
 import Image from 'next/image';
-
+import React from 'react';
+import { Props } from 'useful-react-types';
 const SHARED_CLASSNAME = 'w-10 h-10 bg-zinc-800 border-white/20 border-2 rounded-full flex items-center justify-center text-lg';
-
+const OrbitItemFreezeOnMouseOver = ({ children, radius }: Props.ForceChildren & {radius?: number}) => {
+  const [isFreeze, setIsFreeze] = React.useState(false);
+  return (
+    <OrbitItem
+      direction="clockwise"
+      className="w-10 h-10 bg-zinc-800 border-white/20 border-2 rounded-full flex items-center justify-center text-lg cursor-pointer hover:scale-110"
+      step={isFreeze ? 0 : 0.2}
+      delay={0.1}
+      radius={radius}
+      style={{
+        transition: 'transform 0.1s ease-in-out',
+      }}
+      onMouseOver={(e) => {
+        setIsFreeze(true);
+      }}
+      onMouseOut={(e) => {
+        setIsFreeze(false);
+      }}
+    >
+      {children}
+    </OrbitItem>
+  );
+}
 export default function Page(): JSX.Element {
   return (
     <main>
       <div className="flex items-center justify-center min-h-screen">
         <OrbitPath type="circle" className="absolute w-[25vh] h-[25vh] bg-transparent rounded-full border-2 border-white/10">
-          <OrbitItem direction="clockwise" className={SHARED_CLASSNAME}>
-            💻
-          </OrbitItem>
+          <OrbitItemFreezeOnMouseOver>🐒</OrbitItemFreezeOnMouseOver>
         </OrbitPath>
 
         <OrbitPath type="circle" className="absolute w-[45vh] h-[45vh] bg-transparent rounded-full border-2 border-white/10">
