@@ -1,58 +1,84 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, forwardRef, useState } from 'react';
 import { calculateCoordinatesOnCircle } from '../utils';
 
 type OrbitItemDirection = 'clockwise' | 'counter-clockwise';
 export type OrbitItemProps = {
   className?: string;
   children?: React.ReactNode;
-
   radius?: number;
-
-  step?: number;
-  delay?: number;
+  anglePerStep?: number;
+  timeBetweenSteps?: number;
   startAngle?: number;
   direction?: OrbitItemDirection;
   style?: React.CSSProperties;
+  angle?: number;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export const OrbitItem = ({
-  className,
-  children,
-  radius = 0,
-  step = 0.1,
-  delay = 10,
-  startAngle = 0,
-  direction = 'clockwise',
-  style,
-  ...rest
-}: OrbitItemProps) => {
-  const [angle, setAngle] = React.useState(startAngle);
-  const orbitItemRef = React.useRef<HTMLDivElement>(null);
+/**
+ * OrbitItem is a component that moves around a circle path.
+ * @param className - The class name of the component.
+ * @param children - The children of the component.
+ * @param radius - The radius of the circle used by the parent component.
+ * @param anglePerStep - The angle per step in degrees.
+ * @param timeBetweenSteps - The time between steps in milliseconds.
+ * @param startAngle - The start angle.
+ * @param direction - The direction of the orbit.
+ * @param style - The style of the component.
+ * @param angle - The angle of the component.
+ * @param ref - The ref of the component.
+ * @returns The component.
+ * @example
+ * ```tsx
+ * <OrbitItem direction="clockwise" startAngle={120} step={0.2} className={SHARED_CLASSNAME}>
+ *   😀
+ * </OrbitItem>
+ */
+export const OrbitItem = forwardRef<HTMLDivElement, OrbitItemProps>(
+  (
+    {
+      className,
+      children,
+      radius = 0,
+      anglePerStep = 0.1,
+      timeBetweenSteps = 10,
+      startAngle = 0,
+      direction = 'clockwise',
+      style,
+      angle,
+      ...rest
+    },
+    ref,
+  ) => {
+    const [angleState, setAngle] = useState(startAngle);
+    const effectiveAngle = angle ?? angleState;
+    const internalRef = useRef<HTMLDivElement>(null);
+    const actualRef = (ref ?? internalRef) as React.MutableRefObject<HTMLDivElement>;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setAngle((prevAngle) => (direction === 'clockwise' ? prevAngle + (step % 360) : prevAngle - (step % 360)));
-    }, delay);
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setAngle((prevAngle) => (direction === 'clockwise' ? prevAngle + (anglePerStep % 360) : prevAngle - (anglePerStep % 360)));
+      }, timeBetweenSteps);
 
-    return () => clearInterval(interval);
-  }, [step, delay]);
+      return () => clearInterval(interval);
+    }, [anglePerStep, timeBetweenSteps]);
 
-  const { x, y } = calculateCoordinatesOnCircle(radius, angle, orbitItemRef.current?.getBoundingClientRect() ?? new DOMRect());
+    const { x, y } = calculateCoordinatesOnCircle(radius, effectiveAngle, actualRef.current?.getBoundingClientRect() ?? new DOMRect());
 
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        top: `${y}px`,
-        left: `${x}px`,
-        pointerEvents: 'all',
-        ...style,
-      }}
-      className={className}
-      ref={orbitItemRef}
-      {...rest}
-    >
-      {children}
-    </div>
-  );
-};
+    return (
+      <div
+        style={{
+          position: 'absolute',
+          top: `${y}px`,
+          left: `${x}px`,
+          pointerEvents: 'all',
+          ...style,
+        }}
+        className={className}
+        ref={actualRef}
+        {...rest}
+      >
+        {children}
+      </div>
+    );
+  },
+);
