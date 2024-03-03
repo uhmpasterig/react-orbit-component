@@ -31,7 +31,7 @@ export default function Page(): JSX.Element {
   return (
     <main>
       <div className="flex items-center justify-center min-h-screen">
-        <OrbitPath type="circle" className="absolute w-[10rem] h-[10rem] bg-transparent rounded-full border-2 border-white/10">
+        <OrbitPath type="circle" className="absolute w-[10rem] h-[10rem] bg-transparent rounded-full border-2 border-white/10" >
           <OrbitItemFreezeOnMouseOver>🐒</OrbitItemFreezeOnMouseOver>
         </OrbitPath>
 

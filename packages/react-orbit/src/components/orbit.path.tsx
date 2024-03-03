@@ -7,6 +7,7 @@ interface OrbitPathProps {
   className?: string;
   children?: React.ReactNode;
   type: OrbitPathTypes;
+  style?: React.CSSProperties;
 }
 
 /**
@@ -21,7 +22,7 @@ interface OrbitPathProps {
  *    <OrbitItem></OrbitItem>
  * </OrbitPath>
  */
-export const OrbitPath: React.FC<OrbitPathProps> = ({ className, children, type }) => {
+export const OrbitPath: React.FC<OrbitPathProps> = ({ className, children, type, style }) => {
   const pathRef = useRef<HTMLDivElement>(null);
   const [newChildren, setNewChildren] = useState<React.ReactNode[]>([]);
   const size = useWindowSize();
@@ -53,7 +54,7 @@ export const OrbitPath: React.FC<OrbitPathProps> = ({ className, children, type 
     <div
       style={{
         pointerEvents: 'none',
-      }}
+      } && style}
       className={className}
       ref={pathRef}
     >
