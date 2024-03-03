@@ -1,10 +1,10 @@
 {
   "name": "react-orbit-component",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Uhmpasterig",
   "description": "A Orbit component for React.",
   "license": "MIT",
-  "homepage": "https://test.com/",
+  "homepage": "https://react-orbit.vercel.app/",
   "repository": {
     "type": "git",
     "url": "https://github.com/uhmpasterig/react-orbit-component"
