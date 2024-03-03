@@ -15,7 +15,7 @@ pnpm install react-orbit-component
 ```bash
 bun add react-orbit-component
 ```
-Now import the Components
+Now import the Components.
 ```diff
 +"use client";
 +import { OrbitPath, OrbitItem } from 'react-orbit-component';
