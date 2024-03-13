@@ -8,11 +8,14 @@ const OrbitItemFreezeOnMouseOver = ({ children, radius }: Props.ForceChildren & 
   const [isFreeze, setIsFreeze] = React.useState(false);
   return (
     <OrbitItem
-      direction="clockwise"
       className="w-10 h-10 bg-zinc-800 border-white/20 border-2 rounded-full flex items-center justify-center text-lg cursor-pointer hover:scale-110"
-      anglePerStep={isFreeze ? 0 : 0.2}
-      timeBetweenSteps={0.1}
       radius={radius}
+      config={{
+        direction: 'clockwise',
+        startAngle: 120,
+        anglePerStep: isFreeze ? 0 : 0.2,
+        timeBetweenSteps: 0.1,
+      }}
       style={{
         transition: 'transform 0.1s ease-in-out',
       }}
@@ -39,15 +42,36 @@ export default function Page(): JSX.Element {
           type="circle"
           className="absolute md:w-[20rem] md:h-[20rem] w-[15rem] h-[15rem] bg-transparent rounded-full border-2 border-white/10"
         >
-          <OrbitItem direction="clockwise" startAngle={120} anglePerStep={0.2} className={SHARED_CLASSNAME}>
+          <OrbitItem
+            config={{
+              direction: 'clockwise',
+              startAngle: 120,
+              anglePerStep: 0.2,
+            }}
+            className={SHARED_CLASSNAME}
+          >
             😀
           </OrbitItem>
 
-          <OrbitItem direction="clockwise" startAngle={240} anglePerStep={0.2} className={SHARED_CLASSNAME}>
+          <OrbitItem
+            config={{
+              direction: 'clockwise',
+              startAngle: 240,
+              anglePerStep: 0.2,
+            }}
+            className={SHARED_CLASSNAME}
+          >
             🐒
           </OrbitItem>
 
-          <OrbitItem direction="clockwise" startAngle={360} anglePerStep={0.2} className={SHARED_CLASSNAME}>
+          <OrbitItem
+            config={{
+              direction: 'clockwise',
+              startAngle: 0,
+              anglePerStep: 0.2,
+            }}
+            className={SHARED_CLASSNAME}
+          >
             🪐
           </OrbitItem>
         </OrbitPath>
@@ -56,7 +80,14 @@ export default function Page(): JSX.Element {
           type="circle"
           className="absolute md:w-[30rem] md:h-[30rem] w-[20rem] h-[20rem] bg-transparent rounded-full border-2 border-white/10"
         >
-          <OrbitItem direction="counter-clockwise" startAngle={240} anglePerStep={0.3} className={SHARED_CLASSNAME}>
+          <OrbitItem
+            config={{
+              direction: 'clockwise',
+              startAngle: 240,
+              anglePerStep: 0.3,
+            }}
+            className={SHARED_CLASSNAME}
+          >
             🚀
           </OrbitItem>
         </OrbitPath>

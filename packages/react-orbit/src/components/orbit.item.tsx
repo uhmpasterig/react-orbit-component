@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, forwardRef, useState } from 'react';
 import { calculateCoordinatesOnCircle } from '../utils';
+import { Props } from 'useful-react-types';
 
 type OrbitItemDirection = 'clockwise' | 'counter-clockwise';
-export type OrbitItemProps = {
-  className?: string;
+/* export type OldOrbitItemProps = {
   children?: React.ReactNode;
   radius?: number;
   anglePerStep?: number;
@@ -12,6 +12,18 @@ export type OrbitItemProps = {
   direction?: OrbitItemDirection;
   style?: React.CSSProperties;
   angle?: number;
+} & React.HTMLAttributes<HTMLDivElement>; */
+
+type OrbitItemProps = {
+  radius?: number;
+  config?: {
+    anglePerStep?: number;
+    timeBetweenSteps?: number;
+    startAngle?: number;
+    direction?: OrbitItemDirection;
+    angle?: number;
+  };
+  style?: React.CSSProperties;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 /**
@@ -33,18 +45,14 @@ export type OrbitItemProps = {
  *   😀
  * </OrbitItem>
  */
-export const OrbitItem = forwardRef<HTMLDivElement, OrbitItemProps>(
+export const OrbitItem = forwardRef<HTMLDivElement, OrbitItemProps & Props.HasChildren>(
   (
     {
       className,
       children,
       radius = 0,
-      anglePerStep = 0.1,
-      timeBetweenSteps = 10,
-      startAngle = 0,
-      direction = 'clockwise',
+      config: { anglePerStep = 0.1, timeBetweenSteps = 0.1, startAngle = 0, direction = 'clockwise', angle },
       style,
-      angle,
       ...rest
     },
     ref,
